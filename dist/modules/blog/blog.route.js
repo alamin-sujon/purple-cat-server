@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.blogRoute = void 0;
+const express_1 = require("express");
+const blog_controller_1 = require("./blog.controller");
+const multer_config_1 = require("../../config/multer.config");
+const bodyParser_1 = require("../../middlewares/bodyParser");
+const route = (0, express_1.Router)();
+route.post('/', multer_config_1.multerUpload.fields([{ name: 'images' }]), bodyParser_1.parseBody, blog_controller_1.blogControllers.createBlog);
+route.get('/', blog_controller_1.blogControllers.getAllblog);
+route.get('/:blogId', blog_controller_1.blogControllers.getSingleBlog);
+exports.blogRoute = route;
